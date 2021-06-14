@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+		<title>Permiso por persona</title>
+		<!-- Favicon-->
+		<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+		<!-- Core theme CSS (includes Bootstrap)-->
+		<link href="css/styles.css" rel="stylesheet" />
+		<link href="css/login.css" rel="stylesheet" />
+	</head>
+	
+	<body  >
+	
+				<div id="page-content-wrapper" style="background-color: rgb(0,0,0,0.500);
+	height:100% ;"> 
+				
+				
+				<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+							class="navbar-toggler-icon"></span></button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+							<li class="nav-item"><a class="nav-link" href="home.html">Inicio</a></li>
+							<li class="nav-item"><a class="nav-link" th:href="@{/gestiondepermisos}">Gestion de permisos</a></li>
+							<li class="nav-item"><a class="nav-link" th:href="@{/buscarporpersona}">Permiso por persona</a></li>
+							<li class="nav-item"><a onclick="showLogin()" class="nav-link">Ingresar</a></li>
+						</ul>
+					</div>
+				</nav>
+				
+				
+				
+			<form action="#" th:action="@{/permisoxpersona}" class="form" id="formBuscar" method="post">
+			<h3 style="color:white;">Buscar por apellido y documento:</h3>
+				<div class="col-md-6" style="color:white;">
+					<div class="form-group">
+						<label class="small mb-1" for="inputApellido">Apellido:</label>
+						<input class="form-control py-4" id="inputLastName" type="text" th:name="apellido"
+							th:object="${apellido}" required/>
+							<label class="small mb-1">(No puede estar vacio)</label>
+							<br>
+							<label class="small mb-1">(No se permiten simbolos ni numeros)</label>
+					</div>
+				</div>
+				<div class="col-md-6" style="color:white;">
+					<div class="form-group">
+						<label class="small mb-1" for="inputDocumento">Documento:</label>
+						<input class="form-control py-4" id="inputDocumento" type="text" th:name="documento"
+							th:object="${documento}" required/>
+					</div>
+					<label class="small mb-1">(Debe tener 7 u 8 caracteres)</label>
+				</div>
+				<small  class="advertencia" id="advertencia">Unos de los campos esta compleado incorrectamente</small>
+				<div class="form-group mt-4 mb-0"><input class="btn btn-info" type="submit" Value="Buscar" /> <a
+						class="btn btn-primary" th:href="@{/gestiondepermisos}">Volver</a></div>
+			</form>
+				
+				
+				</div>
+		
+
+	</body>
+	
+	
+	
+	
+	<div id="loginCard">
+
+		<div id="cardLogin" class="card shadow-lg border-0 rounded-lg mt-5">
+			<div class="card-header">
+				<h3 class="text-center font-weight-light my-4">Iniciar sesion</h3>
+			</div>
+			<div class="card-body">
+				<form action="#" th:action="@{/loginprocess}" method="post">
+				<div class="imgUser"> <img alt="" th:src="@{/imgs/user.png}" width="50" height="50"> </div>
+					<p> Usuario: <input class="form-control py-4" name="username" id="username" placeholder="Username" />
+					</p>
+					<p> Contraseña: <input class="form-control py-4" name="password" id="password" type="password"
+							placeholder="Password" /></p>
+					<input class="btn btn-primary" type="submit" value="Acceder" />
+					<button onclick="showLogin()" type="button" class="btn btn-danger">Cancelar</button>
+					</form>
+						<div th:if="${error != null}" class="alert alert-danger">Usuario o Contraseña incorrecto</div>
+			</div>
+		</div>
+	
+	</div>	
+	<style>
+	body{
+		background: url("/imgs/girl-1031169_1920.jpg") no-repeat center center fixed;
+		background-size:cover;
+		
+	}
+	.form{
+		box-sizing:border-box;
+		padding:20px;
+	}
+		
+	.advertencia{
+	transition:0.1s;
+	color:red;
+	padding: 10px 20px ;
+	background-color:#ffcaca;
+	border-radius:5px;
+	opacity:0;
+	position:absolute;
+	visibility:visible;
+	z-index:-5;
+	}
+	.advertencia.show{
+		transition:0.2s;
+		position:relative;
+		opacity:1;
+		z-index:1;
+		visibility:visible;
+	}
+	
+			
+	</style>
+		<!-- Bootstrap core JS-->
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+		<!-- Core theme JS-->
+		<script src="js/scripts.js"></script>
+	<script>
+		let loginCard = document.getElementById("loginCard");
+		function showLogin(){
+			loginCard.classList.toggle("active");
+		
+			
+		}
+		const expresiones = {
+				nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+				documento: /^\d{8}$/, // 8 numeros.
+			}
+		let inputLastName= document.getElementById("inputLastName");
+		let inputDocumento= document.getElementById("inputDocumento");
+		inputLastName.addEventListener("keyup",function(e){
+			if(!expresiones.nombre.test(e.target.value)){
+				e.target.classList.add("formularioIncorrecto");
+			}
+			else{
+				e.target.classList.remove("formularioIncorrecto");
+			}
+		})
+		inputDocumento.addEventListener("keyup",function(e){
+			if(!expresiones.documento.test(e.target.value)){
+				e.target.classList.add("formularioIncorrecto");
+			}
+			else{
+				e.target.classList.remove("formularioIncorrecto");
+			}
+		})
+		let advertencia = document.getElementById("advertencia");
+		let formBuscar = document.getElementById("formBuscar");
+		formBuscar.addEventListener("submit", function(e){
+			e.preventDefault();
+			if(document.getElementsByClassName("formularioIncorrecto").length === 0){
+				advertencia.classList.remove("show");
+				e.target.submit();	
+			}else{
+				
+				advertencia.classList.add("show");
+			}
+			
+		})
+	
+		
+	
+	</script>
+	
+</html>

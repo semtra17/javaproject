@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>Inicio</title>
+	<!-- Favicon-->
+	<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+	<!-- Core theme CSS (includes Bootstrap)-->
+	<link href="css/styles.css" rel="stylesheet" />
+</head>
+
+<body>
+
+	<!-- Page Content-->
+	<div id="page-content-wrapper">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+			<a class="navbar-brand" th:href="@{/}">GESTION</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+					class="navbar-toggler-icon"></span></button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+					<li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+					<li class="nav-item"><a class="nav-link" href="users.html">Users</a></li>
+					<li class="nav-item"><a class="nav-link" href="profiles.html">Profiles</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/manage}">Manage</a></li>
+					<li class="nav-item"><a class="nav-link"><span th:text="${#authentication.getPrincipal().getUsername()}"></a></li>
+					<form th:action="@{/logout}" method="post">
+							<input class="nav-link" type="submit" value="Log out" />
+					</form>
+
+					</ul>
+				</div>
+			</nav>
+			<div class="container-fluid">
+				<h1 class="mt-4">BIENVENIDO</h1>
+				<p>
+					Trabajo practico cuatrimestral, gestion de usuarios y perfiles
+					
+				</p>
+			</div>
+		</div>
+	
+	<!-- Bootstrap core JS-->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Core theme JS-->
+	<script src="js/scripts.js"></script>
+</body>
+
+</html>

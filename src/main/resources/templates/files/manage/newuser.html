@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>Create user</title>
+	<link href="css/styles.css" rel="stylesheet" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
+		crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-primary">
+	<div id="layoutAuthentication">
+		<div id="layoutAuthentication_content">
+			<main>
+				<div class="container">
+					<div class="row justify-content-center">
+						<div class="col-lg-7">
+							<div class="card shadow-lg border-0 rounded-lg mt-5">
+								<div class="card-header">
+									<h3 class="text-center font-weight-light my-4">Crear usuario</h3>
+								</div>
+								<div class="card-body">
+									<form action="#" id="form"  th:action="@{/manage/createuser}" th:object="${user}"
+										method="post">
+										<div class="form-row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="small mb-1" for="inputFirstName">Nombre</label>
+													<input  class="form-control py-4" id="inputFirstName" type="text"
+														placeholder="Ingrese su nombre" th:field="*{name}" />
+													<label class="small mb-1">(Debe tener 3 o mas caracteres)</label>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="small mb-1" for="inputLastName">Apellido</label>
+													<input  class="form-control py-4" id="inputLastName" type="text"
+														placeholder="Ingrese su apellido" th:field="*{lastname}" />
+													<label class="small mb-1">(Debe tener 3 o mas caractaeres)</label>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="small mb-1" for="inputDocumento">Documento</label>
+													<input  class="form-control py-4" id="inputDocumento" type="text"
+														placeholder="Ingrese el documento" th:field="*{document}" />
+													<label class="small mb-1">(Debe tener entre 7 y 8 caracteres)</label>										</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="small mb-1" for="inputEmail">Correo</label>
+													<input class="form-control py-4" id="inputEmail" type="email"
+														placeholder="Ingrese el correo" th:field="*{email}" />
+													<label class="small mb-1">(No puede estar en blanco)</label>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="small mb-1" for="inputUserName">Usuario</label>
+											<input class="form-control py-4" id="inputUserName" type="text"
+												aria-describedby="emailHelp" placeholder="Enter username"  th:field="*{username}" />
+											<label class="small mb-1">(Debe tener al menos 5 caracteres)</label>
+										</div>
+										<div class="form-row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<label class="small mb-1" for="inputPassword">Contraseña</label>
+													<input  class="form-control py-4" id="inputPassword" type="password"
+														placeholder="Enter password"  th:field="*{password}"/>
+													<label class="small mb-1">(Debe tener al menos 5 caracteres)</label>
+												</div>
+											</div>
+										</div>
+					
+										<div class="col-md-6">
+											<div class="form-group">
+												<label class="small mb-1">Activo?</label>
+												<br>
+												<input type="radio"  th:field="*{enabled}" value="true">Si
+												<input type="radio" class="vacacionesfalse"  th:field="*{enabled}" value="false">No			
+											</div>					
+										</div>
+										<label th:text="Roles"
+											class="col-lg-3 col-form-label form-control-label"></label>
+										<div class="col-lg-9">
+											<select  th:field="*{userRole}" class="form-control">
+												<option th:each="role :${roles}" th:value="${role.id}"
+													th:text="${role.name}">
+												</option>
+											</select>
+											<label class="small mb-1">(No puede estar en blanco)</label>
+										</div>
+										<small class="advertencia">Unos de los campos esta vacio o compleado incorrectamente</small>
+										
+										<div class="form-group mt-4 mb-0"><input class="btn btn-success" type="submit" Value="Crear" /> <a class="btn btn-primary" th:href="@{/manage}">Volver</a></div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</main>
+		</div>
+		<div id="layoutAuthentication_footer">
+				<footer class="py-4 bg-light mt-auto">
+				<div class="container-fluid">
+					<div class="d-flex align-items-center justify-content-between small">
+						<div style="color:black;" >Integrantes: Silvestri Matias Chaves Jonathan - Assefh Luciano</div>
+						<div>
+							<a href="#">Privacy Policy</a>
+							&middot;
+							<a href="#">Terms &amp; Conditions</a>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+		crossorigin="anonymous"></script>
+	<script src="js/scripts.js"></script>
+	<script src="js/validacionCampos.js"></script>
+</body>
+
+
+
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+		<title>Users</title>
+		<!-- Favicon-->
+		<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+		<!-- Core theme CSS (includes Bootstrap)-->
+		<link href="css/styles.css" rel="stylesheet" />
+		<link href="css/user.css" rel="stylesheet" />
+	</head>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+		<a class="btn btn-secondary" th:href="@{/}">Home</a>
+	
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+				<li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+				<li class="nav-item"><a class="nav-link" href="users.html">Users</a></li>
+				<li class="nav-item"><a class="nav-link" href="profiles.html">Profiles</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/manage}">Manage</a></li>
+				<li class="nav-item"><a class="nav-link"><span th:text="${#authentication.getPrincipal().getUsername()}"></a></li>
+				<form th:action="@{/logout}" method="post">
+					<input class="nav-link" type="submit" value="Log out" />
+				</form>
+			</ul>
+		</div>
+	</nav>
+	<div  class="tableUser">
+		<h3>Users</h3>
+		<table class="table" border="4px" cellpadding="5" >
+			
+			<thead >
+				<tr class="table-info">
+					<th>Name</th>
+					<th>Lastname</th>
+					<th>Document</th>
+					<th>Email</th>
+					<th>Username</th>
+					<th>Role</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user : ${users}">
+					<td><span th:text="${user.name}" /></td>
+					<td><span th:text="${user.lastname}" /></td>
+					<td><span th:text="${user.document}" /></td>
+					<td><span th:text="${user.email}" /></td>
+					<td><span th:text="${user.username}" /></td>
+					<td><span th:text="${user.userRole.name}"/></td>
+		
+				</tr>
+			</tbody>
+		</table>
+	
+	
+		<div>
+			<a class="btn btn-primary" th:href="@{/}">Go back</a>
+			<a class="pdf" th:href="@{/users/export/pdf}">Export Users to PDF</a>
+		</div>
+	
+	</div>
+</html>

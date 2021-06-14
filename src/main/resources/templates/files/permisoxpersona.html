@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>Permiso por persona</title>
+	<!-- Favicon-->
+	<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+	<!-- Core theme CSS (includes Bootstrap)-->
+	<link href="css/styles.css" rel="stylesheet" />
+	<link href="css/login.css" rel="stylesheet" />
+</head>
+
+<body>
+
+	<!-- Page Content-->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+				class="navbar-toggler-icon"></span></button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+				<li class="nav-item"><a class="nav-link" th:href="@{/home}">Inicio</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/gestiondepermisos}">Gestion de permisos</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/buscarporpersona}">Permiso por persona</a></li>
+				<li class="nav-item"><a onclick="showLogin()" class="nav-link">Ingresar</a></li>
+			</ul>
+		</div>
+	</nav>
+
+
+	<div id="pestanas">
+		<a href="#tablePermisoPeriodo" class="active">Permisos por periodo</a>
+		<a href="#tablePermisoDia">Permisos por dia</a>
+	</div>
+	<div class="tablePermiso active" id="tablePermisoPeriodo">
+		<h3>Permiso por periodo</h3>
+
+
+		<table class="table" id="dataTable" width="100%" cellspacing="0">
+			<thead>
+				<tr class="table-info">
+					<th>Apellido</th>
+					<th>Nombre</th>
+					<th>Documento</th>
+					<th>Fecha</th>
+					<th>Cant de dias</th>
+					<th>Vacaciones</th>
+					<th>Rodado</th>
+					<th>Codigo QR</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="permiso : ${permisoPeriodo}">
+
+					<td><span th:text="${permiso.pedido.apellido}" /></td>
+					<td><span th:text="${permiso.pedido.nombre}" /></td>
+					<td><span th:text="${permiso.pedido.documento}" /></td>
+					<td><span th:text="${permiso.fecha}" /></td>
+					<td><span th:text="${permiso.cantDias}" /></td>
+					<td th:text="${permiso.vacaciones} ? 'SI' : 'NO'" />
+					</td>
+					<td><span th:text="${permiso.rodado.dominio}" /></td>
+					<td><a class="btn btn-primary" th:href="@{/qr-code{id}(id=${permiso.idPermiso})}">Ver QR Code</a>
+					</td>
+
+
+			</tbody>
+		</table>
+		<div>
+			<a class="btn btn-primary" th:href="@{/buscarporpersona}">Volver</a>
+		</div>
+	</div>
+	<div class="tablePermiso" id="tablePermisoDia">
+		<h3>Permiso por dia</h3>
+		<table class="table " id="dataTable" width="100%" cellspacing="0">
+			<thead>
+				<tr class="table-info">
+					<th>Apellido</th>
+					<th>Nombre</th>
+					<th>Documento</th>
+					<th>Fecha</th>
+					<th>Motivo</th>
+					<th>Codigo QR</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="permiso : ${permisoDiario}">
+
+					<td><span th:text="${permiso.pedido.apellido}" /></td>
+					<td><span th:text="${permiso.pedido.nombre}" /></td>
+					<td><span th:text="${permiso.pedido.documento}" /></td>
+					<td><span th:text="${permiso.fecha}" /></td>
+					<td><span th:text="${permiso.motivo}" /></td>
+					<td><a class="btn btn-primary" th:href="@{/qrcode{id}(id=${permiso.idPermiso})}">Ver QR Code</a>
+					</td>
+			</tbody>
+		</table>
+		<div>
+			<a class="btn btn-primary" th:href="@{/buscarporpersona}">Volver</a>
+		</div>
+	</div>
+
+
+
+
+
+
+
+</body>
+
+<div id="loginCard">
+
+	<div id="cardLogin" class="card shadow-lg border-0 rounded-lg mt-5">
+		<div class="card-header">
+			<h3 class="text-center font-weight-light my-4">Login</h3>
+		</div>
+		<div class="card-body">
+			<form action="#" th:action="@{/loginprocess}" method="post">
+				<p> Username: <input class="form-control py-4" name="username" id="username" placeholder="Username" />
+				</p>
+				<p> Password: <input class="form-control py-4" name="password" id="password" type="password"
+						placeholder="Password" /></p>
+				<input class="btn btn-primary" type="submit" value="Login" />
+				<button onclick="showLogin()" type="button" class="btn btn-danger">Cancelar</button>
+			</form>
+			<div th:if="${error != null}" class="alert alert-danger">Invalid username or password</div>
+		</div>
+	</div>
+
+</div>
+<!-- Bootstrap core JS-->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
+<script>
+	let loginCard = document.getElementById("loginCard");
+	function showLogin() {
+		loginCard.classList.toggle("active");
+
+
+	}
+	let navTables = document.getElementById("pestanas");
+	let btnNavTables = document.getElementById("pestanas").getElementsByTagName("a");
+	let tablePermisoPeriodo = document.getElementById("tablePermisoPeriodo");
+	navTables.addEventListener("click", function (e) {
+		for (let i = 0; i < 2; i++) {
+			btnNavTables[i].classList.remove("active");
+		}
+		e.target.classList.add("active");
+		tablePermisoPeriodo.classList.remove("active");
+	})
+
+
+</script>
+<style>
+	html {
+		scroll-behavior: smooth;
+	}
+
+	.tablePermiso {
+		box-sizing: border-box;
+		padding: 15px;
+		opacity: 0;
+		visibility: hidden;
+		position: absolute;
+	}
+
+	.tablePermiso.active {
+		position: relative;
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.tablePermiso:target {
+		position: relative;
+		opacity: 1;
+		visibility: visible;
+	}
+
+
+
+
+	#pestanas {
+	margin-top: 10px;
+		color: white;
+		display: flex;
+		border-bottom: solid;
+		border-width: 0.1px;
+		padding-left: 2px;
+		padding-right: 2px;
+
+	}
+
+	#pestanas a {
+		text-decoration: none;
+		transition: 0.2s;
+		padding: 10px;
+		cursor: pointer;
+		margin: 0px 2px;
+		background-color: #77bbff;
+		display: block;
+		width: 100%;
+		color: white;
+		height: 100%;
+		border-radius: 10px;
+		text-align: center;
+	}
+
+	#pestanas a:hover {
+		transition: 0.8s;
+		background-color: #0074e8;
+	}
+
+	#pestanas a.active {
+		transition: 0.2s;
+		color: white;
+		background-color: #0074e8;
+			  box-shadow: -10px -10px 10px rgba(255,255,255,0.2),
+              15px 15px 15px rgba(0,0,0,0.1),
+            inset -5px -5px 5px rgba(255,255,255,0.2),
+             inset 5px 5px 5px rgba(0,0,0,0.1);
+	}
+</style>
+
+
+
+</html>

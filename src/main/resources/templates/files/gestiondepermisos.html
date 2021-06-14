@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>Gestion de Permisos</title>
+	<!-- Favicon-->
+	<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+	<!-- Core theme CSS (includes Bootstrap)-->
+	<link href="css/styles.css" rel="stylesheet" />
+	<link href="css/gestionpermisos.css" rel="stylesheet" />
+	<link href="css/login.css" rel="stylesheet" />
+	<link href="css/notificacion.css" rel="stylesheet" />
+</head>
+
+<body>
+
+
+	<div id="page-content-wrapper">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+			<a class="navbar-brand" th:href="@{/index}">Inicio</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+					class="navbar-toggler-icon"></span></button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+					<li class="nav-item"><a class="nav-link" href="home.html">Inicio</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/gestiondepermisos}">Gestion de permisos</a>
+					</li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/buscarporpersona}">Permiso por persona</a></li>
+
+					<li class="nav-item"><a onclick="showLogin()" class="nav-link">Ingresar</a></li>
+				</ul>
+			</div>
+		</nav>
+	<div class="gestionDePermisos">
+			<ul class="navPermisos" id="navPermisos">
+				<li><a onclick="instrucciones()" id="form1" class="btnNavPermiso active">Pasos a seguir</a></li>
+				<li><a onclick="formPersona()" id="form2" class="btnNavPermiso">Persona</a></li>
+				<li><a onclick="formRodado()" id="form3" class="btnNavPermiso">Rodado</a></li>
+				<li><a onclick="formPermiso()" id="form4" class="btnNavPermiso">Permiso</a></li>
+			</ul>
+			<div class="forms" id="forms">
+				<!--========================= PASOS A SEGUIR ========================= -->
+				<!--========================= PASOS A SEGUIR========================= -->
+				<!--========================= PASOS A SEGUIR ========================= -->
+				<section class="active">
+					<h3>Pasos a seguir</h3>
+					<p>Para poder obtener su permiso ya sea diario o por un periodo<br>debera completar el formulario de
+						persona y rodado</p>
+					<p>De esa manera quedara registrado para poder obtener su permiso posteriormente.</p>
+				<div>
+				
+			
+				</div>
+					
+				</section>
+				<!--========================= CREAR PERSONA ========================= -->
+				<!--========================= CREAR PERSONA ========================= -->
+				<!--========================= CREAR PERSONA ========================= -->
+				<section id="seccionPersonas">
+					<h3>Gestionar Persona</h3>
+					<form class="formAction persona" action="#" method="post" th:action="@{/crearpersona}" th:object="${persona}">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="small mb-1" for="inputFirstName">Nombre:</label>
+								<input autocomplete="off" class="form-control py-4 inputNombre" id="inputFirstName" type="text"
+									placeholder="Ingrese nombre" th:field="${persona.nombre}" required />
+								<label class="small mb-1">(Debe tener 3 o mas caracteres)</label>
+								<label class="small mb-1">(No se permiten simbolos ni numeros)</label>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="small mb-1" for="inputLastName">Apellido:</label>
+								<input autocomplete="off" class="form-control py-4 inputNombre" id="inputLastName" type="text"
+									placeholder="Ingrese apellido" th:field="${persona.apellido}" required />
+								<label class="small mb-1">(Debe tener 3 o mas caracteres)</label>
+								<label class="small mb-1">(No se permiten simbolos ni numeros)</label>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="small mb-1" for="inputDocumento">Documento</label>
+								<input autocomplete="off" class="form-control py-4 inputDocumento" id="inputDocumento" type="text"
+									placeholder="Ingrese documento" th:field="${persona.documento}" required />
+								<label class="small mb-1">(Debe tener 7 u 8 caracteres)</label>
+							</div>
+						</div>
+						<small class="advertencia">Unos de los campos esta compleado incorrectamente</small>
+						<div class="form-group mt-4 mb-0"><input class="btn btn-success" type="submit" Value="Crear" />
+							
+						</div>
+					</form>
+				</section>
+			<!--========================= CREAR RODADO ========================= -->
+			<!--========================= CREAR RODADO ========================= -->
+			<!--========================= CREAR RODADO ========================= -->
+				<section>
+					<h3>Gestionar Rodados</h3>
+					<form class="formAction  rodado" action="#" method="post" th:action="@{/newrodado}" th:object="${rodado}">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="small mb-1" for="inputDominio">Dominio</label>
+								<input class="form-control py-4 inputDominio" id="inputDominio" type="text"
+									placeholder="Ingrese dominio" name="dominio" th:field="${rodado.dominio}" required />
+								<label class="small mb-1">(Debe tener formato "AAA111" o "AA111AA")</label>
+								<label class="small mb-1">(No puede contener simbolos)</label>
+
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="small mb-1" for="inputVehiculo">Vehiculo</label>
+								<input class="form-control py-4" id="inputVehiculo" type="text"
+									placeholder="Ingrese vehiculo" th:field="${rodado.vehiculo}" required />
+								<label class="small mb-1">(Debe tener 3 o mas caracteres)</label>
+							</div>
+						</div>
+					
+							<small class="advertencia">Unos de los campos esta compleado incorrectamente</small>
+				
+						<div class="form-group mt-4 mb-0"><input class="btn btn-success" type="submit" Value="Crear" />
+						</div>
+					</form>
+
+				</section>
+				<!--========================= CREAR PERMISOS ========================= -->
+				<!--========================= CREAR PERMISOS ========================= -->
+				<!--========================= CREAR PERMISOS ========================= -->
+				<section class="gestionPermisos">
+					<h3>Gestionar Permiso</h3>
+					<medium>Seleccione el tipo de permiso que desea adquirir:</medium>
+					<ul id="navTipoPermiso">
+						<div class="col-xl-3 col-md-6">
+							<div class="card bg-secondary text-white mb-4 btnTipoPermiso">
+								<div class="card-footer d-flex align-items-center justify-content-between">
+									<a class="medium text-white stretched-link" onclick="formPermisoDiario()"> Crear permiso diario</a>
+									<div class="small text-white"><i class="fas fa-angle-right"></i></div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="col-xl-3 col-md-6">
+							<div class="card bg-secondary text-white mb-4 btnTipoPermiso">
+		
+									<div class="card-footer d-flex align-items-center justify-content-between">
+										<a class="medium text-white stretched-link" onclick="formPermisoPeriodo()">Crear permiso periodo</a>
+										<div class="small text-white">
+											<i class="fas fa-angle-right"></i>
+										</div>
+									</div>
+							</div>
+						</div>
+						
+
+					</ul>
+					<div class="formTipoPermiso " id="formPeriodoDiario">
+						<form id="formPermisoDiario" class="formAction diario"  action="#" th:action="@{/crearPermisoDiario}"
+							th:object="${permisoDiario}" method="post">
+							<div class="form-row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="medium mb-1" for="inputFecha">Fecha:</label>
+										<input class="form-control py-4" id="inputFecha" name="fecha"  type="date"
+											th:field="*{fecha}" required />
+										<label class="small mb-1">(No puede estar vacio)</label>
+									</div>
+								</div>
+								<div class="col-lg-9">
+									<label class="medium mb-1" for="inputPersona">Documento:</label>
+									<input class="form-control py-4 inputDocumento" id="inputFirstName" type="text"
+										placeholder="Ingrese dni" name="documento" th:name="documento" autocomplete="off" th:object="${documento}" required />									
+								
+									<label class="small mb-1">(Debebe contener 7 u 8 caractaeres)</label>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="medium mb-1" for="inputMotivo">Motivo:</label>
+										<input class="form-control py-4" id="inputMotivo" type="text"
+											th:field="*{motivo}" required  autocomplete="off"/>
+										<label class="small mb-1">(No puede estar vacio)</label>
+									</div>
+								</div>
+
+								<div class="col-lg-9">
+									<label class="medium mb-1" for="inputDesdeHasta">Desde:</label>
+									<select th:field="*{desdeHasta}" class="form-control">
+										<option th:each="lugar : ${lugares}" th:value="${lugar.idLugar}">
+											<td><span th:text="${lugar.lugar}" /></td>
+										</option>
+									</select>
+									<label class="small mb-1">(No puede estar vacio)</label>
+								</div>
+								<div class="col-lg-9">
+									<label class="medium mb-1" for="inputDesdeHasta">Hasta:</label>
+									<select th:field="*{desdeHasta}" class="form-control">
+										<option th:each="lugar : ${lugares}" th:value="${lugar.idLugar}">
+											<td><span th:text="${lugar.lugar}" /></td>
+										</option>
+									</select>
+									<label class="small mb-1">(No puede estar vacio)</label>
+								</div>
+
+							</div>
+							<small class="advertencia">Unos de los campos esta compleado incorrectamente</small>
+							<div class="form-group mt-4 mb-0"><input class="btn btn-success" type="submit"
+									Value="Crear" /></div>
+
+						</form>
+						<form id="formPermisoPeriodo" class="formAction periodo" action="#" th:action="@{/crearPermisoPeriodo}"
+							th:object="${permisoPeriodo}" method="post">
+							<div class="form-row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="medium mb-1" for="inputFecha">Fecha:</label>
+										<input class="form-control py-4" id="inputFirstName" type="date"
+											th:field="*{fecha}" required />
+										<label class="small mb-1">(No puede estar vacio)</label>
+									</div>
+								</div>
+								<div class="col-lg-9">
+									<label class="medium mb-1" for="inputPersona">Documento:</label>
+									<input class="form-control py-4 inputDocumento" autocomplete="off"  type="text"
+											placeholder="Ingrese dni" name="documento" th:name="documento" th:object="${documento}" required />									
+									
+									<label class="small mb-1">(Debe contener 7 u 8 caracteres)</label>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="medium mb-1" >Cantidad de dias:</label>
+										<input class="form-control py-4" id="cantidadDias" name="cantidadDias" type="text"
+											th:field="*{cantDias}" required />
+										<label class="small mb-1">(No puede estar vacio o ser 0)</label>
+
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="medium mb-1" for="inputFecha">¿Por vacaciones?</label>
+									<br>
+									<input type="radio" th:field="*{vacaciones}" value="true">Si
+									<input type="radio" class="vacacionesfalse"  th:field="*{vacaciones}" value="false">No			
+									</div>					
+								</div>
+								<div class="col-lg-9">
+									<label class="medium mb-1" for="inputRodado">Rodado:</label>
+									<input class="form-control py-4 inputDominio" id="inputRodado" type="text"
+											placeholder="Ingrese dominio" name="dominio"  th:name="dominio" th:object="${dominio}" required />									
+								
+										<label class="small mb-1">(Debe tener formato "AAA111" o "AA111AA")</label>
+									<label class="small mb-1">(No puede estar vacío, ni contener simbolos)</label>
+								</div>
+							<div class="col-lg-9">
+								<label class="medium mb-1" for="inputDesdeHasta">Desde:</label>
+
+								<select th:field="*{desdeHasta}" class="form-control">
+									<option th:each="lugar : ${lugares}" th:value="${lugar.idLugar}">
+										<td><span th:text="${lugar.lugar}" /></td>
+									</option>
+								</select>
+								<label class="small mb-1">(No puede estar vacio)</label>
+							</div>
+							<div class="col-lg-9">
+								<label class="medium mb-1" for="inputDesdeHasta">Hasta:</label>
+								<select th:field="*{desdeHasta}" class="form-control">
+									<option th:each="lugar : ${lugares}" th:value="${lugar.idLugar}">
+										<td><span th:text="${lugar.lugar}" /></td>
+									</option>
+								</select>
+								<label class="small mb-1">(No puede estar vacio)</label>
+							</div>
+							</div>
+							<small class="advertencia">Unos de los campos esta compleado incorrectamente</small>
+							<div class="form-group mt-4 mb-0"><input class="btn btn-success" type="submit"
+									Value="Crear" /></div>
+
+				
+
+					</form>
+					</div>
+				</section>
+			</div>
+		</div>
+	
+		
+
+	</div>
+
+
+	
+
+</body>
+
+<div class="card  border-0 rounded-lg mt-5" id="notification">
+		<div class="card  border-0 rounded-lg mt-5" id="cardNotificacion">
+		
+		<div class="imgNotificacion"> 
+		<img alt="" th:src="@{/imgs/check.png}" width="50" height="50">
+		<img alt="" th:src="@{/imgs/cancel.png}" width="50" height="50">
+		 </div>
+		<p class="mensajeError" th:text="${mensajeError}" />
+		<p class="mensajeConfirmacion" th:text="${mensajeConfirmacion}" />
+			
+					<button onclick="cerrarNot()" type="button" class="btn btn-danger">Cerrar</button>
+		</div>
+</div>
+<div id="loginCard">
+
+	<div id="cardLogin" class="card shadow-lg border-0 rounded-lg mt-5">
+		<div class="card-header">
+			<h3 class="text-center font-weight-light my-4">Iniciar sesion</h3>
+		</div>
+		<div class="card-body">
+			<form action="#" th:action="@{/loginprocess}"  method="post">
+				<div class="imgUser"> <img alt="" th:src="@{/imgs/user.png}" width="50" heigth="50"> </div>
+				<p> Usuario: <input class="form-control py-4" name="username" id="username" placeholder="Username" />
+				</p>
+				<p> Contraseña: <input class="form-control py-4" name="password" id="password" type="password"
+						placeholder="Password" /></p>
+				<input class="btn btn-primary" type="submit" value="Acceder" />
+				<button onclick="showLogin()" type="button" class="btn btn-danger">Cancelar</button>
+				</form>
+					<div th:if="${error != null}" class="alert alert-danger">Usuario o Contraseña incorrecto</div>
+		</div>
+	</div>
+
+</div>	
+	
+<!-- Bootstrap core JS-->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
+<script src="js/notificacion.js"></script>
+<script src="js/validacionCamposSinLogueo.js"></script>
+<script src="js/gestionpermisos.js"></script>
+
+<script>
+	let loginCard = document.getElementById("loginCard");
+	function showLogin() {
+		loginCard.classList.toggle("active");
+
+	}
+</script>
+
+</html>
