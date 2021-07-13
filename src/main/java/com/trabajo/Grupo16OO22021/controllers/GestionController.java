@@ -211,8 +211,8 @@ public class GestionController {
 	@PostMapping("/permisoxpersona")
 	public ModelAndView buscarporpersona(long documento, String apellido) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.ENCONTRADO);
-		List<PermisoDiario> permisoDiario = permisoService.buscarPermisoDiario(documento, apellido);
-		List<PermisoPeriodo> permisoPeriodo = permisoService.buscarPermisoPeriodo(documento, apellido);
+		List<PermisoDiario> permisoDiario = permisoService.getDiarios(documento, apellido);
+		List<PermisoPeriodo> permisoPeriodo = permisoService.getPeriodos(documento, apellido);
 		mAV.addObject("permisoPeriodo", permisoPeriodo);
 		mAV.addObject("permisoDiario", permisoDiario);
 		return mAV;

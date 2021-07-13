@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Resultados</title>
+<link href="css/styles.css" rel="stylesheet" />
+</head>
+<body>
+	
+		<div id="page-content-wrapper">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+			<a class="navbar-brand" th:href="@{/index}">GESTION</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+					class="navbar-toggler-icon"></span></button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+					<li class="nav-item"><a class="nav-link" href="users.html">Users</a></li>
+					<li class="nav-item"><a class="nav-link" href="profiles.html">Profiles</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/buscar}">Buscar</a></li>
+					<li class="nav-item"><a class="nav-link"><span th:text="${#authentication.getPrincipal().getUsername()}"></a></li>
+					<form th:action="@{/logout}" method="post">
+							<input class="nav-link" type="submit" value="Cerrar sesion" />
+					</form>
+
+					</ul>
+				</div>
+			</nav>
+	
+	<div  id="pestanas">
+		<a  href="#tablePermisoPeriodo" class="active" >Permisos por periodo</a>
+		<a  href="#tablePermisoDia" >Permisos por dia</a>
+	</div>
+	
+	<div class="tablePermiso active" id="tablePermisoPeriodo">
+		<h3>Permiso por periodo</h3>
+		
+					
+		<table class="table" id="dataTable" width="100%" cellspacing="0">
+			<thead>
+				<tr class="table-info">
+					<th>Apellido</th>
+					<th>Nombre</th>
+					<th>Documento</th>
+					<th>Fecha</th>
+					<th>Cant de dias</th>
+					<th>Vacaciones</th>
+					<th>Rodado</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="permiso : ${permisoPeriodo}">
+
+					<td><span th:text="${permiso.pedido.apellido}" /></td>
+					<td><span th:text="${permiso.pedido.nombre}" /></td>
+					<td><span th:text="${permiso.pedido.documento}" /></td>
+					<td><span th:text="${permiso.fecha}" /></td>
+					<td><span th:text="${permiso.cantDias}" /></td>
+			     	<td th:text="${permiso.vacaciones} ? 'SI' : 'NO'" /></td>
+					<td><span th:text="${permiso.rodado.dominio}" /></td>
+
+
+			</tbody>
+		</table>
+	</div>
+	<div class="tablePermiso" id="tablePermisoDia">
+		<h3>Permiso por dia</h3>
+		<table class="table " id="dataTable" width="100%" cellspacing="0">
+			<thead>
+				<tr class="table-info">
+					<th>Apellido</th>
+					<th>Nombre</th>
+					<th>Documento</th>
+					<th>Fecha</th>
+					<th>Motivo</th>
+
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="permiso : ${permisoDiario}">
+
+					<td><span th:text="${permiso.pedido.apellido}" /></td>
+					<td><span th:text="${permiso.pedido.nombre}" /></td>
+					<td><span th:text="${permiso.pedido.documento}" /></td>
+					<td><span th:text="${permiso.fecha}" /></td>
+					<td><span th:text="${permiso.motivo}" /></td>
+
+			</tbody>
+		</table>
+		<div>
+		
+		</div>
+	</div>
+				<a class="btn btn-info" th:href="@{/buscar}">Volver</a>
+		 </div>
+	
+
+
+	
+</body>
+	<script>
+		let navTables = document.getElementById("pestanas");
+		let btnNavTables = document.getElementById("pestanas").getElementsByTagName("a");
+		let tablePermisoPeriodo = document.getElementById("tablePermisoPeriodo");
+		navTables.addEventListener("click",function(e){
+			for(let i = 0; i<2;i++){
+				btnNavTables[i].classList.remove("active");
+			}
+				e.target.classList.add("active");
+				tablePermisoPeriodo.classList.remove("active");
+		})
+	</script>
+
+	<style>
+	html{
+		scroll-behavior:smooth;
+	}
+	.tablePermiso{
+		box-sizing:border-box;
+		padding:15px;
+		opacity:0;
+		visibility:hidden;
+		position:absolute;
+	}
+	.tablePermiso.active{
+		position:relative;
+		opacity:1;
+		visibility:visible;
+	}
+	.tablePermiso:target{
+		position:relative;
+		opacity:1;
+		visibility:visible;
+	}
+
+	
+	
+
+	#pestanas{
+	color:white;
+	display:flex;
+	border-bottom:solid;
+	border-width:0.1px;
+	padding-left:2px;
+	padding-right:2px;
+	
+	}
+	#pestanas a{
+		text-decoration:none;
+		transition:0.2s;
+		padding:10px;
+		cursor:pointer;
+		margin:0px 2px;
+		background-color:#77bbff;
+		display:block;
+		width:100%;
+		color:white;
+		height:100%;
+		border-radius:10px;
+		text-align:center;
+	}
+	#pestanas a:hover{
+		transition:0.8s;
+		background-color:#0074e8;
+	}
+
+	#pestanas a.active{
+		transition:0.2s;
+		color:white;
+		background-color:#0074e8;
+	}
+	</style>
+</html>

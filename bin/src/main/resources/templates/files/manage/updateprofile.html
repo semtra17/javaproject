@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="description" content="" />
 	<meta name="author" content="" />
-	<title>Update profile</title>
+	<title>Modificar Perfil</title>
 	<link href="css/styles.css" rel="stylesheet" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
 		crossorigin="anonymous"></script>
@@ -22,7 +22,7 @@
 						<div class="col-lg-7">
 							<div class="card shadow-lg border-0 rounded-lg mt-5">
 								<div class="card-header">
-									<h3 class="text-center font-weight-light my-4">Update profile</h3>
+									<h3 class="text-center font-weight-light my-4">Modificar perfil</h3>
 								</div>
 								<div class="card-body">
 									<form action="#" th:action="@{/manage/updateprofile{id}(id=${role.id})}" th:object="${role}"
@@ -32,23 +32,23 @@
 										<div class="form-row">
 											<div class="col-md-6">
 												<div class="form-group">
-													<label class="small mb-1" for="inputName">Name</label>
+													<label class="small mb-1" for="inputName">Nombre</label>
 													<input class="form-control py-4" id="inputName" type="text"
 														placeholder="Enter name" th:field="*{name}" />
-													<label class="small mb-1">(Must not be blank)</label>
+													<label class="small mb-1">(No debe quedar vacio)</label>
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
-													<label class="small mb-1" for="inputDescription">Description</label>
+													<label class="small mb-1" for="inputDescription">Descripcion</label>
 													<input class="form-control py-4" id="inputDescription" type="text"
 														placeholder="Enter description" th:field="*{description}" />
-													<label class="small mb-1">(Must not be blank)</label>
+													<label class="small mb-1">(No debe quedar vacio)</label>
 												</div>
 											</div>
 											<div class="form-group mt-4 mb-0"><input class="btn btn-success"
-													type="submit" Value="Edit" /> <a class="btn btn-primary"
-													th:href="@{/manage}">Go Back</a></div>
+													type="submit" Value="Editar" /> <a class="btn btn-primary"
+													th:href="@{/manage}">Volver</a></div>
 									</form>
 								</div>
 							</div>
@@ -58,10 +58,10 @@
 			</main>
 		</div>
 		<div id="layoutAuthentication_footer">
-			<footer class="py-4 bg-light mt-auto">
+				<footer class="py-4 bg-light mt-auto">
 				<div class="container-fluid">
 					<div class="d-flex align-items-center justify-content-between small">
-						<div class="text-muted">Copyright &copy; Your Website 2020</div>
+						<div style="color:black;" >Integrantes: Silvestri Matias Chaves Jonathan - Assefh Luciano</div>
 						<div>
 							<a href="#">Privacy Policy</a>
 							&middot;

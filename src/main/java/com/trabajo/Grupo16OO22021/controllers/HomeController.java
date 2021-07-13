@@ -238,8 +238,9 @@ public class HomeController {
 	@PostMapping("/permisoxperson")
 	public ModelAndView buscarporpersona(long documento, String apellido) {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.RESULTADOS);
-		List<PermisoDiario> permisoDiario = permisoService.buscarPermisoDiario(documento, apellido);
-		List<PermisoPeriodo> permisoPeriodo = permisoService.buscarPermisoPeriodo(documento, apellido);
+		List<PermisoDiario> permisoDiario = permisoService.getDiarios(documento, apellido);
+		List<PermisoPeriodo> permisoPeriodo = permisoService.getPeriodos(documento, apellido);
+		
 		mAV.addObject("permisoPeriodo", permisoPeriodo);
 		mAV.addObject("permisoDiario", permisoDiario);
 		return mAV;
@@ -262,7 +263,7 @@ public class HomeController {
 		LocalDate fechaDesde1 = LocalDate.parse(fechaDesde);
 		LocalDate fechaHasta1 = LocalDate.parse(fechaHasta);
 
-		List<PermisoDiario> permisosDiario = permisoService.traerDiarioEntreFechas(fechaDesde1, fechaHasta1);
+		List<PermisoDiario> permisosDiario =  permisoService.traerDiarioEntreFechas(fechaDesde1, fechaHasta1);
 		List<PermisoPeriodo> permisosPeriodo = permisoService.traerPeriodoEntreFechas(fechaDesde1, fechaHasta1);
 		
 
@@ -279,10 +280,7 @@ public class HomeController {
 		LocalDate fechaHasta1 = LocalDate.parse(fechaHasta);
 		List<PermisoDiario> permisosDiario = permisoService.traerDiarioFechaYLugar(fechaDesde1, fechaHasta1, lugar);
 		List<PermisoPeriodo> permisosPeriodo = permisoService.traerPeriodoFechaYLugar(fechaDesde1, fechaHasta1, lugar);
-		for(PermisoDiario p : permisosDiario) {
-			System.out.println(p.getIdPermiso());
-
-		}
+	
 		mAV.addObject("permisoPeriodo", permisosPeriodo);
 		mAV.addObject("permisoDiario", permisosDiario);
 

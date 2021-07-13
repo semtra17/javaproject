@@ -18,5 +18,9 @@ public interface IUserRepository extends JpaRepository<User, Serializable> {
 	
 	@Query("SELECT u FROM User u JOIN FETCH u.userRole WHERE u.username = (:username)")
 	public abstract User findByUsernameAndFetchUserRolesEagerly(@Param("username") String username);
+	
+	
+	@Query("SELECT u FROM User u  WHERE u.document = :documento")
+	public abstract User findUserByDocument(@Param("documento") int documento);
 
 }

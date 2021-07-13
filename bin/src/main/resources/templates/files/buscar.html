@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Buscar</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+	<!-- Core theme CSS (includes Bootstrap)-->
+	<link href="css/styles.css" rel="stylesheet" />
+	<link href="css/buscar.css" rel="stylesheet" />
+</head>
+	<body>
+	
+		<div id="page-content-wrapper">
+				<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+					<a class="navbar-brand" th:href="@{/index}">GESTION</a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+							class="navbar-toggler-icon"></span></button>
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+							<li class="nav-item"><a class="nav-link" href="users.html">Usuarios</a></li>
+							<li class="nav-item"><a class="nav-link" href="profiles.html">Perfiles</a></li>
+							<li class="nav-item"><a class="nav-link" th:href="@{/buscar}">Buscar</a></li>
+							<li class="nav-item"><a class="nav-link"><span th:text="${#authentication.getPrincipal().getUsername()}"></a></li>
+							<form th:action="@{/logout}" method="post">
+									<input class="nav-link" type="submit" value="Cerrar sesion" />
+							</form>
+		
+							</ul>
+						</div>
+					</nav>
+					
+					
+			<div class="contenedorBusquedas">
+				<ul class="navBusquedas" id="navBusquedas">
+					<li><a onclick="showPermisoPorPersona()" id="form1" class="btnNavBusqueda active">Por persona</a></li>
+					<li><a onclick="showPermisoPorFecha()" id="form2" class="btnNavBusqueda">por fecha</a></li>
+					<li><a onclick="showPermisoPorFechayLugar()" id="form3" class="btnNavBusqueda">Por fecha y lugar</a></li>
+					<li><a onclick="showPermisoPorRodado()" id="form4" class="btnNavBusqueda">Por rodado</a></li>
+				</ul>
+				<div class="formsBusqueda" id="formsBusqueda">
+					<section class="active">
+						<h3>Buscar por persona</h3>
+						<form action="#" th:action="@{/permisoxperson}" method="post">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="small mb-1" for="inputApellido">Apellido:</label>
+									<input class="form-control py-4" id="inputLastaname" type="text" th:name="apellido"
+										th:object="${apellido}" />
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="small mb-1" for="inputDocumento">Documento:</label>
+									<input class="form-control py-4" id="inputDocumento" type="text" th:name="documento"
+										th:object="${documento}" />
+								</div>
+							</div>
+							<div class="form-group mt-4 mb-0"><input class="btn btn-primary" type="submit" Value="Buscar" /> <a
+									class="btn btn-primary" th:href="@{/index}">Volver</a></div>
+						</form>
+					</section>
+					<section>
+							<h3>Buscar por fecha</h3>
+							<form action="#" th:action="@{/permisoxfecha}" method="post">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="small mb-1" for="inputDesde">Desde:</label>
+										<input class="form-control py-4" id="inputDesde" type="date" th:name="fechaDesde"
+											th:object="${fechaDesde}" />
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="small mb-1" for="inputHasta">Hasta:</label>
+										<input class="form-control py-4" id="inputHasta" type="date" th:name="fechaHasta"
+											th:object="${fechaHasta}" />
+									</div>
+								</div>
+								<div class="form-group mt-4 mb-0"><input class="btn btn-primary" type="submit" Value="Buscar" /> <a
+										class="btn btn-primary" th:href="@{/index}">Volver</a></div>
+							</form>
+							
+					</section>
+					<section>
+					
+							<h3>Buscar por fecha y lugar</h3>
+							<form action="#" th:action="@{/permisoxfechaylugar}" method="post">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="small mb-1" for="inputDesde">Desde:</label>
+										<input class="form-control py-4" id="inputDesde" type="date" th:name="fechaDesde"
+											th:object="${fechaDesde}" />
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="small mb-1" for="inputHasta">Hasta:</label>
+										<input class="form-control py-4" id="inputHasta" type="date" th:name="fechaHasta"
+											th:object="${fechaHasta}" />
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="small mb-1" for="inputLugar">Lugar:</label>
+										<input class="form-control py-4" id="inputLugar" type="text" th:name="lugar"
+											th:object="${lugar}" />
+									</div>
+								</div>
+								<div class="form-group mt-4 mb-0"><input class="btn btn-primary" type="submit" Value="Buscar" /> <a
+										class="btn btn-primary" th:href="@{/index}">Volver</a></div>
+							</form>
+					</section>
+					<section>
+							<h3>Buscar por rodado</h3>
+							
+							<form action="#" th:action="@{/permisoxrodado}" method="post">
+								<div class="col-md-6">
+									<div class="form-group">
+										<label class="small mb-1" for="inputApellido">Dominio:</label>
+										<input class="form-control py-4" id="inputLastaname" type="text" th:name="dominio"
+											th:object="${dominio}" />
+									</div>
+								</div>
+								<div class="form-group mt-4 mb-0"><input class="btn btn-primary" type="submit" Value="Buscar" /> <a
+										class="btn btn-primary" th:href="@{/index}">Volver</a></div>
+							</form>
+					</section>
+				</div>
+						
+			</div>		
+		</div>
+		
+		
+	</body>
+	<script>
+	let navBusquedas = document.getElementById("navBusquedas");
+	let btnNavBusqueda = (document.getElementById("navBusquedas").getElementsByTagName("a"));
+
+	let formsBusqueda = document.getElementById("formsBusqueda").getElementsByTagName("section");
+	
+	
+	navBusquedas.addEventListener("click", function(e){
+		
+		if((e.target).className  == "btnNavBusqueda"){
+			
+			for(let i = 0; i< 4; i++){
+				btnNavBusqueda[i].classList.remove("active");
+				
+			}
+			(e.target).classList.add("active");
+		
+		}
+		
+		
+	});
+
+	function showPermisoPorPersona(){
+		for(let i = 0; i<4; i++){
+			formsBusqueda[i].classList.remove("active");
+		}
+		formsBusqueda[0].classList.add("active");
+	}
+
+	function showPermisoPorFecha(){
+		for(let i = 0; i<4; i++){
+			formsBusqueda[i].classList.remove("active");
+		}
+		formsBusqueda[1].classList.add("active");
+	}
+
+	function showPermisoPorFechayLugar(){
+		for(let i = 0; i<4; i++){
+			formsBusqueda[i].classList.remove("active");
+		}
+		formsBusqueda[2].classList.add("active");
+	}
+
+	function showPermisoPorRodado(){
+		for(let i = 0; i<4; i++){
+			formsBusqueda[i].classList.remove("active");
+		}
+		formsBusqueda[3].classList.add("active");
+	}
+
+
+	</script>
+	<!-- Bootstrap core JS-->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Core theme JS-->
+	<script src="js/scripts.js"></script>
+
+
+</html>

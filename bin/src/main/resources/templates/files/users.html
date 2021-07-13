@@ -13,34 +13,37 @@
 		<link href="css/styles.css" rel="stylesheet" />
 		<link href="css/user.css" rel="stylesheet" />
 	</head>
+
 	<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-		<a class="btn btn-secondary" th:href="@{/}">Home</a>
-	
+		<a class="navbar-brand" th:href="@{/index}">GESTION</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+				class="navbar-toggler-icon"></span></button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-				<li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
-				<li class="nav-item"><a class="nav-link" href="users.html">Users</a></li>
-				<li class="nav-item"><a class="nav-link" href="profiles.html">Profiles</a></li>
-				<li class="nav-item"><a class="nav-link" th:href="@{/manage}">Manage</a></li>
+				<li class="nav-item"><a class="nav-link" href="users.html">Usuarios</a></li>
+							<li class="nav-item"><a class="nav-link" href="profiles.html">Perfiles</a></li>
+							<li class="nav-item"><a class="nav-link" th:href="@{/buscar}">Buscar</a></li>
 				<li class="nav-item"><a class="nav-link"><span th:text="${#authentication.getPrincipal().getUsername()}"></a></li>
-				<form th:action="@{/logout}" method="post">
-					<input class="nav-link" type="submit" value="Log out" />
-				</form>
+					<form th:action="@{/logout}" method="post">
+							<input class="nav-link" type="submit" value="Cerrar sesion" />
+					</form>
+
 			</ul>
 		</div>
 	</nav>
 	<div  class="tableUser">
-		<h3>Users</h3>
+		<h3>Usuario</h3>
 		<table class="table" border="4px" cellpadding="5" >
 			
 			<thead >
 				<tr class="table-info">
-					<th>Name</th>
-					<th>Lastname</th>
-					<th>Document</th>
-					<th>Email</th>
-					<th>Username</th>
-					<th>Role</th>
+					<th>Nombre</th>
+					<th>Apellido</th>
+					<th>Documento</th>
+					<th>Correo</th>
+					<th>Usuario</th>
+					<th>Rol</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -58,8 +61,8 @@
 	
 	
 		<div>
-			<a class="btn btn-primary" th:href="@{/}">Go back</a>
-			<a class="pdf" th:href="@{/users/export/pdf}">Export Users to PDF</a>
+			<a class="btn btn-primary" th:href="@{/index}">Volver</a>
+			<a class="pdf" th:href="@{/users/export/pdf}">Exportar usuarios a PDF</a>
 		</div>
 	
 	</div>

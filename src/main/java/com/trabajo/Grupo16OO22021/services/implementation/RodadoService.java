@@ -67,15 +67,11 @@ public class RodadoService implements IRodadoService {
 
 	}
 	public Rodado findDominio(String dominio) {
-		List<Rodado> rodado = getAll();
-		Rodado rodado1 = new Rodado();
-		for(Rodado rodado2 : rodado) {
-			if(rodado2.getDominio().equals(dominio)) {
-				rodado1 = rodado2;
-				return rodado1;
-			}
-		}
-		return null;
+		Rodado rodado = rodadoRepository.findByDominio(dominio);
+		if(rodado == null)
+			return null;
+		else
+			return rodado;
 	}
 
 	

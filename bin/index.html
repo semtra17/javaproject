@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" style="font-family: 'Roboto', sans-serif;
+	    background: #000046;  
+		background: -webkit-linear-gradient(to right, #1CB5E0, #000046);  
+		background: linear-gradient(to right, #1CB5E0, #000046); ">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;1,400&display=swap" rel="stylesheet">
+<head>
+	<meta charset="UTF-8">
+	<title>Permiso</title>
+</head>
+
+<body style="display: flex; justify-content: center;">
+	
+
+</body >
+
+<script>
+
+		/**
+		* Funcion que captura las variables pasados por GET
+		* Devuelve un array de clave=>valor
+		*/
+		function getGET() {
+			// capturamos la url
+			var loc = document.location.href;
+			// si existe el interrogante
+			if (loc.indexOf('?') > 0) {
+				// cogemos la parte de la url que hay despues del interrogante
+				var getString = loc.split('?')[1];
+				// obtenemos un array con cada clave=valor
+				var GET = getString.split('&');
+				var get = {};
+				// recorremos todo el array de valores
+				for (var i = 0, l = GET.length; i < l; i++) {
+					var tmp = GET[i].split('=');
+					get[tmp[0]] = unescape(decodeURI(tmp[1]));
+				}
+				return get;
+			}
+		}
+		window.onload = function () {
+			// Cogemos los valores pasados por get
+			var valores = getGET();
+			if (valores) {
+				//recogemos los valores que nos envia la URL en variables para trabajar 
+				//con ellas
+				if (valores.cantDias) {
+					var fecha = valores['fecha'];
+					var documento = valores['documento'];
+					var nombre = valores['nombre'];
+					var apellido = valores['apellido'];
+					var dominio = valores['dominio'];
+					var cantDias = valores['cantDias'];
+					var vacaciones = valores['vacaciones'];
+
+					// hacemos un bucle para pasar por cada indice del array de valores
+					document.write('<div style="background-color: white;border-radius: 10px; box-sizing: border-box; padding:50px; box-shadow: 0 0 20px 0 black; width: 80%;">');
+					document.write('<h2 style="font-weight: bold; font-style: italic; font-size: 35px;">Permiso</h2>');
+					document.write('<p style="font-size: 25px;">Fecha del permiso: ' + fecha + '</p>');
+					document.write('<p style="font-size: 25px;"> Persona: ' + nombre + ' ' + apellido + '</p>');
+					document.write('<p style="font-size: 25px;">DNI: ' + documento + '</p>');
+					document.write('<p style="font-size: 25px;">Dominio del rodado: ' + dominio + '</p>');
+					document.write('<p style="font-size: 25px;">Cantidad de dias: ' + cantDias) + '</p>';
+					if(vacaciones=='true'){
+					document.write('<p style="font-size: 25px;">Por vacaciones: Si </p>');
+						
+					}
+					if(vacaciones=='false'){
+						document.write('<p style="font-size: 25px;">Por vacaciones: No </p>');	
+					}
+					document.write('</div>');
+				}
+				if(valores.motivo) {
+					
+					var fecha = valores['fecha'];
+					var documento = valores['documento'];
+					var nombre = valores['nombre'];
+					var apellido = valores['apellido'];
+					var motivo = valores['motivo'];
+
+					// hacemos un bucle para pasar por cada indice del array de valores
+					document.write('<div style="background-color: white; border-radius: 10px; box-sizing: border-box; padding:50px; box-shadow: 0 0 20px 0 black; width: 80%;">');
+					document.write('<p style="font-size: 25px;">Fecha del permiso: ' + fecha + '</p>');
+					document.write('<p style="font-size: 25px;">Persona: ' + nombre + ' ' + apellido + '</p>');
+					document.write('<p style="font-size: 25px;">DNI: ' + documento + '</p>');
+					document.write('<p style="font-size: 25px;">Motivo: ' + motivo + '</p>');
+					document.write('</div>');
+				}
+			} else {
+				// no se ha recibido ningun parametro por GET
+				document.write("No se ha recibido ningún parámetro");
+			}
+		}
+	</script>
+
+</html>

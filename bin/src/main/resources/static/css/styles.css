@@ -10,6 +10,9 @@
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+ nav{
+	box-shadow: 0 0 5px 0 black;
+}
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -10286,6 +10289,7 @@ table tbody tr td form input{
 	border-width:0.1px;
 	padding-left:2px;
 	padding-right:2px;
+	margin-top:20px;
 	
 }
 .pestañas a{
@@ -10301,18 +10305,22 @@ table tbody tr td form input{
 	height:100%;
 	border-radius:10px;
 	text-align:center;
+
 }
 .pestañas a:hover{
 	transition:0.8s;
 	background-color:#0074e8;
 }
-.pestañas a:nth-child(1){
-	background-color:#0074e8;
-}
+
 .pestañas a.color{
 	transition:0.2s;
 	color:white;
 	background-color:#0074e8;
+	  box-shadow: -10px -10px 10px rgba(255,255,255,0.2),
+              15px 15px 15px rgba(0,0,0,0.1),
+            inset -5px -5px 5px rgba(255,255,255,0.2),
+             inset 5px 5px 5px rgba(0,0,0,0.1);
+	
 }
 .pestañas a.nocolor{
 	transition:0.2s;
@@ -10349,7 +10357,59 @@ table tbody tr td form input{
 }
 
 
+.formularioCorrecto{
+	
+	border:solid;
+	border-color:green;
+}
 
+.formularioIncorrecto{
+	
+	border:solid;
+	border-color:red;
+}
+
+.advertencia{
+	transition:0.1s;
+	color:red;
+	padding: 10px 20px ;
+	background-color:#ffcaca;
+	border-radius:5px;
+	opacity:0;
+	position:absolute;
+	visibility:visible;
+	z-index:-5;
+}
+.advertencia.show{
+	transition:0.2s;
+	position:relative;
+	opacity:1;
+	z-index:1;
+	visibility:visible;
+}
+
+.camposCorrectos{
+	
+	transition:0.1s;
+	
+	padding: 10px 20px ;
+	background-color:#dfffdf;
+	color:green;
+	border-radius:5px;
+	opacity:0;
+	position:absolute;
+	visibility:visible;
+	z-index:-5;
+	
+}
+
+.camposCorrectos.show{
+	transition:0.2s;
+	position:relative;
+	opacity:1;
+	z-index:1;
+	visibility:visible;
+}
 
 
 

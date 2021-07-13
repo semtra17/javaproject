@@ -92,15 +92,12 @@ public class UserService implements IUserService, UserDetailsService {
 	return  userConverter.entityToModel(user);
 	}
 	public com.trabajo.Grupo16OO22021.entities.User findByDocumento(int documento) {
-		List<com.trabajo.Grupo16OO22021.entities.User> user = getAll();
-		com.trabajo.Grupo16OO22021.entities.User u = new com.trabajo.Grupo16OO22021.entities.User();
-		for(com.trabajo.Grupo16OO22021.entities.User u1 : user) {
-			if(u1.getDocument()==documento) {
-				u = u1;
-				return u;
-			}
-		}
-		return null;
+		com.trabajo.Grupo16OO22021.entities.User user = userRepository.findUserByDocument(documento);
+		
+			if(user == null)
+				return null;
+			else
+				return user;
 	}
 
 	@Override

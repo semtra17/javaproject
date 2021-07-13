@@ -1,0 +1,149 @@
+@charset "ISO-8859-1";
+html{
+	height:100%;
+}
+body{
+	background-color:#4242ff;	
+}
+
+
+.gestionDePermisos{
+	position:absolute;
+	display:grid;
+	grid-template-columns:20% 80%;
+	height:110%;
+	width:100%;
+	
+
+
+	
+}
+.navPermisos{
+	background-color:white;
+	width:100%;
+	height:200%;
+	overflow:hidden;
+}
+
+.navPermisos  li{
+	margin:5% -50px;
+	width:150%;
+	
+}
+.navPermisos li a{
+	transition:0.2s;
+	width:100%;
+	font-weight:lighter;
+	background-color:rgb(100,0,0,0.1);
+	cursor:pointer;
+	width:inherit;
+	display:block;
+	padding:20px;
+	color:black;
+	
+}
+.navPermisos li a.active{
+	font-weight:bolder;
+	transition:0.4s;
+	position:relative;
+	color:blue;
+	box-shadow:0 0 5px 0 black;
+	background-color:rgb(100,0,0,0.1);
+	
+	
+}
+
+.forms{
+	border-radius:20px;
+	box-sizing:border-box;
+	display:flex;
+	flex-direction:column;
+	width:90%;
+	height:100%;
+	margin: 10px auto;
+	padding:50px;
+	background-color:white;
+	box-shadow:0 0 10px 0 black;
+
+}
+.forms section.active{
+	position:relative;
+	transition:0.2s;
+	opacity:1;
+	visibility:visible;
+	z-index:1;
+}
+.forms section{
+	position:absolute;
+	opacity:1;
+	visibility:hidden;
+	z-index:-5;
+}
+
+
+
+
+
+footer{
+	position:absolute;
+	bottom:0;
+	width:100%;
+}
+
+#navTipoPermiso{
+	display:flex;
+	flex-direction:row;
+	list-style:none;	
+	
+}
+#navTipoPermiso li a{
+	cursor:pointer;
+	color:black;
+	padding:5px;
+	
+}
+#navTipoPermiso li a.active{
+	transition:0.2s;
+	font-weight:bolder;
+	color:#d26900;
+	
+}
+#formPermisoDiario,#formPermisoPeriodo{
+	visibility:0;
+	opacity:0;
+	position:absolute;
+	
+}
+
+
+#formPermisoPeriodo.active,
+#formPermisoDiario.active{
+	transition:0.3s;
+	visibility:1;
+	opacity:1;
+	position:relative;
+	
+}
+.col-xl-3{
+	margin:20px auto;
+	cursor:pointer;
+	
+}
+.card.btnTipoPermiso{
+		transition:0.4s;
+	width:80%;
+	height:80%;
+	box-shadow:0 0 2px 0 black;
+}
+.card.btnTipoPermiso.active{
+	transition:0.4s;
+	box-shadow:5px 5px 3px 0 black;
+}
+
+
+
+.vacacionesfalse{
+	margin-left:15px;
+}
+
+
